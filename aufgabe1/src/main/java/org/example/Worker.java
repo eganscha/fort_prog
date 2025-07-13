@@ -1,7 +1,7 @@
 package org.example;
 
 public class Worker implements Runnable {
-    private static final int WORKER_THREAD_SLEEP_MS = 100;
+    private static final int WORKER_THREAD_SLEEP_MS = 1000;
 
     @Override
     public void run() {
