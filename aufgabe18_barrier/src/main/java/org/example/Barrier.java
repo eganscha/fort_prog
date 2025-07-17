@@ -13,13 +13,14 @@ public class Barrier {
         this.target = target;
     }
 
-    public synchronized void barrierWait() throws InterruptedException {
-        count++;
-        if (count == target) {
-            // Release Barrier
-            semaphore.release(count - 1); // (beim letzten wird nicht acquired)
-        } else {
-            semaphore.acquire();
+    public void barrierWait() throws InterruptedException {
+        synchronized (this) {
+            if (++count == target) {
+                semaphore.release(count - 1); // (beim letzten wird nicht acquired)
+                return;
+            }
         }
+
+        semaphore.acquire();
     }
 }
